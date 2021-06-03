@@ -1,4 +1,4 @@
-import {Game, Grid} from "../main/example";
+import { Game, Grid } from "../main/example";
 
 // The universe of the Game of Life is an infinite, two-dimensional orthogonal grid of square cells,
 // each of which is in one of two possible states, live or dead, (or populated and unpopulated,
@@ -16,22 +16,30 @@ import {Game, Grid} from "../main/example";
 //     Any dead cell with three live neighbours becomes a live cell.
 //     All other live cells die in the next generation. Similarly, all other dead cells stay dead.
 
-describe('example test', () => {
-    it("any live cell with fewer than two live neighbours dies, as if by underpopulation", () => {
-        const initialGridStatus: ("" | "C")[][] = [
-            ["", "", ""],
-            ["", "C", ""],
-            ["", "", ""]
-        ];
-        const grid = new Grid(initialGridStatus);
-        const game = new Game(grid);
-        game.nextTick();
+type GridArray = ("" | "C")[][];
 
-        const expectedGridStatus = [
-            ["", "", ""],
-            ["", "", ""],
-            ["", "", ""]
-        ];
-        expect(game.getGrid().toArray()).toEqual(expectedGridStatus);
+const tests: { testCase:string, input: GridArray, expectedOutput: GridArray }[] = [{
+    testCase: "thingy",
+    input: [
+        ["", "", ""],
+        ["", "C", ""],
+        ["", "", ""]
+    ], expectedOutput: [
+        ["", "", ""],
+        ["", "", ""],
+        ["", "", ""]
+    ]
+}]
+
+describe('example test', () => {
+    tests.forEach(({ input, expectedOutput }) => {
+        it("any live cell with fewer than two live neighbours dies, as if by underpopulation", () => {
+
+            const grid = new Grid(input);
+            const game = new Game(grid);
+            game.nextTick();
+
+            expect(game.getGrid().toArray()).toEqual(expectedOutput);
+        })
     })
 })
