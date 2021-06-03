@@ -1,6 +1,36 @@
-export class Grid {
-    constructor(grid: ("" | "C")[][]) {
+export type StringCell = "" | "C"
+export type StringGrid = StringCell[][];
 
+class Cell {
+    private constructor(private state: "dead" | "alive") {}
+
+    static fromString(stringCell: StringCell): Cell {
+        return stringCell === ""
+            ? new Cell("dead")
+            : new Cell("alive");
+    };
+
+    isAlive(): boolean {
+        return undefined;
+    }
+
+    die(): Cell {
+
+    }
+
+    live(): Cell {
+        return undefined;
+    }
+}
+
+export class Grid {
+    constructor(private cells: Cell[][]) {}
+
+    static fromArray(grid: ("" | "C")[][]) {
+        const cells: Cell[][] = grid.map(
+            row => row.map(Cell.fromString)
+        )
+        return new Grid(cells);
     }
 
     toArray() {
@@ -9,6 +39,14 @@ export class Grid {
             ["", "", ""],
             ["", "", ""]
         ];
+    }
+
+    getCells(): Cell[] {
+        return this.cells.reduce(() => {}, []);
+    }
+
+    getNeighbours(cell: Cell): Cell[] {
+
     }
 }
 
@@ -19,8 +57,11 @@ export class Game {
 
     nextTick() {
         this.grid.getCells().map(cell => {
-            const neighbours = cell.getNeighbours().filter(cell => cell.);
-            if (neighbours < 2) return cell.die();
+            const aliveNeighboursNumber = this.grid
+                .getNeighbours(cell)
+                .filter(cell => cell.isAlive())
+                .length;
+            if (aliveNeighboursNumber < 2) return cell.die();
             return cell.live();
         })
     }

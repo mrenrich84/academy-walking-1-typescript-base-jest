@@ -1,4 +1,4 @@
-import {Game, Grid} from "../main/example";
+import {Game, Grid, StringGrid} from "../main/example";
 
 // The universe of the Game of Life is an infinite, two-dimensional orthogonal grid of square cells,
 // each of which is in one of two possible states, live or dead, (or populated and unpopulated,
@@ -16,12 +16,9 @@ import {Game, Grid} from "../main/example";
 //     Any dead cell with three live neighbours becomes a live cell.
 //     All other live cells die in the next generation. Similarly, all other dead cells stay dead.
 
-type GridArray = ("" | "C")[][];
-
-
 describe('example test', () => {
     describe("any live cell with fewer than two live neighbours dies, as if by underpopulation", () => {
-        const tests: { testCase: string, input: GridArray, expectedOutput: GridArray }[] = [
+        const tests: { testCase: string, input: StringGrid, expectedOutput: StringGrid }[] = [
             {
                 testCase: "cell is in the middle",
                 input: [
@@ -61,7 +58,7 @@ describe('example test', () => {
         ]
         tests.forEach(({testCase, input, expectedOutput}) => {
             it(testCase, () => {
-                const grid = new Grid(input);
+                const grid = Grid.fromArray(input);
                 const game = new Game(grid);
                 game.nextTick();
                 expect(game.getGrid().toArray()).toEqual(expectedOutput);
@@ -69,7 +66,7 @@ describe('example test', () => {
         })
     })
     describe("any live cell with two or three live neighbours lives on to the next generation", () => {
-        const tests: { testCase: string, input: GridArray, expectedOutput: GridArray }[] = [
+        const tests: { testCase: string, input: StringGrid, expectedOutput: StringGrid }[] = [
             {
                 testCase: "horizontal row goes vertical",
                 input: [
@@ -89,8 +86,8 @@ describe('example test', () => {
             //         ["C", "", ""],
             //         ["", "", ""]
             //     ], expectedOutput: [
-            //         ["C", "", ""],
-            //         ["", "", ""],
+            //         ["C", "C", ""],
+            //         ["C", "C", ""],
             //         ["", "", ""]
             //     ]
             // },
@@ -102,14 +99,14 @@ describe('example test', () => {
             //         ["", "C", "C"]
             //     ], expectedOutput: [
             //         ["", "", ""],
-            //         ["", "", ""],
-            //         ["", "", "C"]
+            //         ["", "C", "C"],
+            //         ["", "C", "C"]
             //     ]
             // },
         ]
         tests.forEach(({testCase, input, expectedOutput}) => {
             it(testCase, () => {
-                const grid = new Grid(input);
+                const grid = Grid.fromArray(input);
                 const game = new Game(grid);
                 game.nextTick();
                 expect(game.getGrid().toArray()).toEqual(expectedOutput);
