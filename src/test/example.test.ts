@@ -17,7 +17,6 @@ import {Game, Grid} from "../main/example";
 //     All other live cells die in the next generation. Similarly, all other dead cells stay dead.
 
 describe('example test', () => {
-    // Something
     it("any live cell with fewer than two live neighbours dies, as if by underpopulation", () => {
         const initialGridStatus: ("" | "C")[][] = [
             ["", "", ""],
