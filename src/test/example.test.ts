@@ -71,41 +71,41 @@ describe('example test', () => {
     describe("any live cell with two or three live neighbours lives on to the next generation", () => {
         const tests: { testCase: string, input: GridArray, expectedOutput: GridArray }[] = [
             {
-                testCase: "cell is in the middle",
+                testCase: "horizontal row goes vertical",
                 input: [
                     ["", "", ""],
                     ["C", "C", "C"],
                     ["", "", ""]
                 ], expectedOutput: [
-                    ["", "", ""],
                     ["", "C", ""],
-                    ["", "", ""]
+                    ["", "C", ""],
+                    ["", "C", ""]
                 ]
             },
-            {
-                testCase: "cell is in the top left",
-                input: [
-                    ["C", "C", ""],
-                    ["C", "", ""],
-                    ["", "", ""]
-                ], expectedOutput: [
-                    ["C", "", ""],
-                    ["", "", ""],
-                    ["", "", ""]
-                ]
-            },
-            {
-                testCase: "cell is in the bottom right",
-                input: [
-                    ["", "", ""],
-                    ["", "", "C"],
-                    ["", "C", "C"]
-                ], expectedOutput: [
-                    ["", "", ""],
-                    ["", "", ""],
-                    ["", "", "C"]
-                ]
-            },
+            // {
+            //     testCase: "cell is in the top left",
+            //     input: [
+            //         ["C", "C", ""],
+            //         ["C", "", ""],
+            //         ["", "", ""]
+            //     ], expectedOutput: [
+            //         ["C", "", ""],
+            //         ["", "", ""],
+            //         ["", "", ""]
+            //     ]
+            // },
+            // {
+            //     testCase: "cell is in the bottom right",
+            //     input: [
+            //         ["", "", ""],
+            //         ["", "", "C"],
+            //         ["", "C", "C"]
+            //     ], expectedOutput: [
+            //         ["", "", ""],
+            //         ["", "", ""],
+            //         ["", "", "C"]
+            //     ]
+            // },
         ]
         tests.forEach(({testCase, input, expectedOutput}) => {
             it(testCase, () => {

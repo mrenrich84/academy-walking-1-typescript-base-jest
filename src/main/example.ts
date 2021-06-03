@@ -18,7 +18,11 @@ export class Game {
     }
 
     nextTick() {
-
+        this.grid.getCells().map(cell => {
+            const neighbours = cell.getNeighbours().filter(cell => cell.);
+            if (neighbours < 2) return cell.die();
+            return cell.live();
+        })
     }
 
     getGrid(): Grid {
