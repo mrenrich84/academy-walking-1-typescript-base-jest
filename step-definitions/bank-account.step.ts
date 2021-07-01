@@ -4,7 +4,6 @@ import { Now } from '../src/main/example';
 
 const mockNow = (): Now => () => new Date()
 
-
 @binding()
 export class BankAccountSteps {
     private readonly accountService = new ErikoAccountService();
