@@ -1,5 +1,5 @@
-export class Example {
-    add(a: number, b: number) {
-        return a + b;
-    }
+interface AccountService {
+    deposit(amount: number): void
+    withdraw(amount: number): void
+    printStatement(): void
 }

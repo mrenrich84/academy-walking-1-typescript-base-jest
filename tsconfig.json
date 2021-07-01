@@ -9,6 +9,6 @@
         "outDir": "./dist",
         "experimentalDecorators": true
     },
-    "include": ["src/**/*"],
+    "include": ["src/**/*", "step-definitions/**/*"],
     "exclude": ["node_modules"]
 }

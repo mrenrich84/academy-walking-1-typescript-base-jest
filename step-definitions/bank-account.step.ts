@@ -3,20 +3,24 @@ import { assert } from 'chai';
 
 @binding()
 export class BankAccountSteps {
-    private accountBalance: number = 0;
 
-    @given(/A bank account with starting balance of \$(\d*)/)
-    public givenAnAccountWithStartingBalance(amount: number) {
-        this.accountBalance = amount;
+    @given(/(a client makes )?a deposit of \$(\d*) on \$(\d+-\d+-\d+)/)
+    public givenDeposit(_:string, amount: string, date: string) {
+        console.log(amount, date)
     }
 
-    @when(/\$(\d*) is deposited/)
-    public deposit(amount: number) {
-        this.accountBalance = Number(this.accountBalance) + Number(amount);
+    @given(/(a client makes )?a withdrawal of \$(\d*) on \$(\d+-\d+-\d+)/)
+    public givenWithdrawal(_:string, amount: string, date: string) {
+        console.log(amount, date)
     }
 
-    @then(/The bank account balance should be \$(\d*)/)
-    public accountBalanceShouldEqual(expectedAmount: number) {
-        assert.equal(this.accountBalance, expectedAmount);
+    @when(/they print their bank statement/)
+    public whenPrint() {
+        console.log("printed")
+    }
+
+    @then(/they would see:/)
+    public seeAccount() {
+        console.log("see")
     }
 }
